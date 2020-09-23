@@ -1,5 +1,6 @@
 /* eslint-disable jsx-a11y/label-has-associated-control */
 import React from 'react';
+import { Link } from 'react-router-dom';
 import googleIcon from '../assets/static/google-icon.png';
 import twitterIcon from '../assets/static/twitter-icon.png';
 import '../assets/styles/containers/Login.scss';
@@ -18,24 +19,28 @@ const Login = () => (
             {' '}
             Recuérdame
           </label>
-          <a href='/'>Olvidé mi contraseña</a>
+          <Link className='login__container--forgot-pasword' to='/password-recover' rel='canonical'>
+            <p>Olvidé mi contraseña</p>
+          </Link>
         </div>
       </form>
       <section className='login__container--social-media'>
         <div>
           <img src={googleIcon} alt='Google Icon' />
           {' '}
-          <a href='http://google.com/'>Inicia sesión con Google</a>
+          <a rel='noreferrer' target='_blank' href='http://google.com/'>Inicia sesión con Google</a>
         </div>
         <div>
           <img src={twitterIcon} alt='Twitter Icon' />
           {' '}
-          <a href='https://twitter.com/'>Inicia sesión con Twitter</a>
+          <a rel='noreferrer' target='_blank' href='https://twitter.com/'>Inicia sesión con Twitter</a>
         </div>
       </section>
       <p className='login__container--register'>
         ¿No tienes ninguna cuenta?
-        <a href='./register'> Regístrate</a>
+        <Link className='login__container--register-button' to='/register' rel='canonical'>
+          <p>Regístrate</p>
+        </Link>
       </p>
     </section>
   </section>
