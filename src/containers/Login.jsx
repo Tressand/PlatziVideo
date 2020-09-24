@@ -36,12 +36,12 @@ const Login = () => (
           <a rel='noreferrer' target='_blank' href='https://twitter.com/'>Inicia sesión con Twitter</a>
         </div>
       </section>
-      <p className='login__container--register'>
+      <div className='login__container--register'>
         ¿No tienes ninguna cuenta?
         <Link className='login__container--register-button' to='/register' rel='canonical'>
           <p>Regístrate</p>
         </Link>
-      </p>
+      </div>
     </section>
   </section>
 );
