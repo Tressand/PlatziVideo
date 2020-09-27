@@ -2,6 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import gravatar from '../utils/gravatar';
+import { logoutRequest } from '../actions';
 import '../assets/styles/components/Header.scss';
 import logo from '../assets/static/logo-platzi-video-BW2.png';
 import userIcon from '../assets/static/user-icon.png';
@@ -11,6 +12,10 @@ const Header = (props) => {
 
   const hasUser = Object.keys(user).length > 0;
 
+  const handleLogout = () => {
+    props.logoutRequest({});
+  };
+
   return (
     <header className='header'>
       <Link to='/' rel='canonical'>
@@ -18,20 +23,41 @@ const Header = (props) => {
       </Link>
       <div className='header__menu'>
         <div className='header__menu--profile'>
+
           {
             hasUser ?
               <img src={gravatar(user.email)} alt='Perfil' /> :
               <img src={userIcon} alt='Perfil' />
           }
-          <p>Perfil</p>
+
+          {
+            hasUser ? (
+              <p>
+                {user.name}
+              </p>
+            ) :
+              <p>Perfil</p>
+          }
+
         </div>
         <ul>
+
           <Link className='header__menu--link' to='/account' rel='canonical'>
             <li><p>Cuenta</p></li>
           </Link>
-          <Link className='header__menu--link' to='/login' rel='canonical'>
-            <li><p>Cerrar Sesión</p></li>
-          </Link>
+
+          {
+            hasUser ? (
+              <Link className='header__menu--link' href='#logout' onClick={handleLogout} rel='canonical'>
+                <li><p>Cerrar Sesión</p></li>
+              </Link>
+            ) : (
+              <Link className='header__menu--link' to='/login' rel='canonical'>
+                <li><p>Iniciar Sesión</p></li>
+              </Link>
+            )
+          }
+
         </ul>
       </div>
     </header>
@@ -44,4 +70,8 @@ const mapStateToProps = (state) => {
   };
 };
 
-export default connect(mapStateToProps, null)(Header);
+const mapDispatchToProps = {
+  logoutRequest,
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(Header);
